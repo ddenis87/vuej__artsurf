@@ -1,7 +1,7 @@
 <template>
   <div class="main-page">
     <h1 class="main-page__title">List Beer</h1>
-    <c-button @click="controlGetList" :inIsLoad="controlNextLoad">Load list beer</c-button>
+    <c-button @click="controlGetList" :inIsLoad="controlNextLoad">{{ controlGetText }}</c-button>
     <div class="main-page__list">
       <ul class="list">
         <li class="list__item" 
@@ -55,6 +55,7 @@ export default {
       pageNumber: 1,
       pageLimit: 25,
       urlServer: 'https://api.punkapi.com/v2/beers',
+      controlGetText: 'Load list beer',
       controlNextText: 'Show next',
       controlNextLoad: false,
       controlNextShow: false,
@@ -96,7 +97,7 @@ export default {
     },
     controlGetNext() {
       this.controlNextLoad = true;
-      this.controlNextText = "loading"
+      this.controlNextText = "loading";
       this.pageNumber++;
       let option = {
         page: this.pageNumber,
@@ -111,7 +112,7 @@ export default {
           if (response.data.length == 0 || response.data.length < this.pageLimit) { 
             this.controlNextShow = false; 
             this.controlNextLoad = false; 
-            this.controlNextText = 'Show next'
+            this.controlNextText = 'Show next';
           ;}
           for(let i = 0; i < response.data.length; i++) {
             this.listItem.push({
@@ -123,7 +124,8 @@ export default {
             if(i == response.data.length - 1) 
               setTimeout(() => {
                 this.controlNextLoad = false; 
-                this.controlNextText = 'Show next'; 
+                this.controlNextText = 'Show next';
+                this.controlGetText = 'Reload list beer';
               }, 1000); // - таймер специально для того чтобы успеть увидеть загрузку на кнопке (если сервер быстро ответит)
           }
         })
