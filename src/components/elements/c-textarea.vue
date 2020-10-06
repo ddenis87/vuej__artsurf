@@ -1,21 +1,21 @@
 <template>
-  <div class="c-input">
-    <label class="c-input__title"><slot></slot></label>
-    <input class="c-input__input" 
-           type="text"
-           :class="{'c-input__input_validation': isEmpty}"
-           v-model="inputValue"
-           @input="setInputValue"
-           @keydown="enterInputValue" />
+  <div class="c-textarea">
+  <label class="c-textarea__title"><slot></slot></label>
+  <textarea class="c-textarea__input" 
+            rows="5"
+            :class="{'c-textarea__input_validation': isEmpty}"
+            v-model="inputValue"
+            @input="setInputValue"
+            @keydown="enterInputValue" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'cInput',
+  name: 'cTextarea',
   props: [
-    'inValidation',
-    'inValue',
+  'inValidation',
+  'inValue',
   ],
   computed: {
     isEmpty() {return this.inValidation;}
@@ -40,14 +40,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.c-input {
+.c-textarea {
   position: relative;
   &__title {
     position: absolute;
+    display: flex;
+    align-items: flex-end;
+    width: 94.5%;
+    height: 13px;
     left: 5px;
-    top: 5px;
+    top: 1px;
     font-size: 8px;
     text-transform: uppercase;
+    background-color: white;
   }
   &__input {
     left: 0px;
@@ -60,6 +65,7 @@ export default {
     border: 1px solid grey;
     border-radius: 3px;
     box-sizing: border-box;
+    resize: none;
     outline: none;
     &:focus {
       box-shadow: 1px 1px 1px lightblue, -1px -1px 1px lightblue;

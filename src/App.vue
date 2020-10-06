@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <main-page></main-page>
   </div>
 </template>
@@ -18,7 +18,18 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 
-#app {
+.app {
+  display: grid;
+  grid-template-areas: "content" "footer";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 60px;
   font-family: 'Montserrat';
+
+  &__content {
+    grid-area: content;
+  }
+  &__footer {
+    grid-area: footer;
+  }
 }
 </style>
