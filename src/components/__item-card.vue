@@ -43,7 +43,11 @@ export default {
   min-height: 240px;
   border-bottom: 2px solid darkgreen;
   padding: 5px 0px;
-  &__index { display: flex; justify-content: center; align-self: center; min-width: 60px; }
+  &__index { 
+    display: flex; 
+    justify-content: center; 
+    align-self: center; 
+    min-width: 60px; }
   &__images {
     display: flex;
     justify-content: center;
@@ -66,12 +70,10 @@ export default {
     box-sizing: border-box;
     .body__description { text-align: justify; }
     .body__brewers-tips { text-align: justify; }
-
     &-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-
       .control__button {
         width: 30px;
         height: 30px;

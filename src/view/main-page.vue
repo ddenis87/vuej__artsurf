@@ -19,7 +19,7 @@
                 :inIsLoad="controlNextLoad"
                 @click="controlGetNext">{{ controlNextText }}</c-button>
     </div>
-    <dialog-delete :inItem="propsItemDelete"
+    <dialog-delete :inItem="propsItem"
                    v-if="dialogDeleteShow"
                    @close="() => {dialogDeleteShow = false}"
                    @delete="itemDelete"></dialog-delete>
@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       listItem: [],
+      propsItem: {},
       pageNumber: 1,
       pageLimit: 25,
       urlServer: 'https://api.punkapi.com/v2/beers',
@@ -59,8 +60,6 @@ export default {
       controlNextShow: false,
       dialogDeleteShow: false,
       dialogChangeShow: false,
-      propsItemDelete: {},
-      propsItem: {},
     }
   },
   methods: {
@@ -80,14 +79,15 @@ export default {
       this.listItem.splice(item, 1);
     },
     itemDeleteConfirm(item) {
-      this.propsItemDelete.index = item;
-      this.propsItemDelete.name = this.listItem[item].name;
+      this.propsItem.index = item;
+      this.propsItem.name = this.listItem[item].name;
       this.dialogDeleteShow = true;
     },
     controlGetList() {
       this.controlNextLoad = true;
       this.controlNextShow = true;
       this.listItem = [];
+      this.pageNumber = 1;
       let option = {
         page: this.pageNumber,
         limit: this.pageLimit,
@@ -108,7 +108,7 @@ export default {
       axios
         .get(this.urlServer + `?page=${option.page}&limit=${option.limit}`, null, null)
         .then((response) => {
-          if (response.data.length == 0 || response.data.length < 25) { 
+          if (response.data.length == 0 || response.data.length < this.pageLimit) { 
             this.controlNextShow = false; 
             this.controlNextLoad = false; 
             this.controlNextText = 'Show next'
@@ -127,6 +127,13 @@ export default {
               }, 1000); // - таймер специально для того чтобы успеть увидеть загрузку на кнопке (если сервер быстро ответит)
           }
         })
+        .catch((error) => {
+          this.listItem.push({
+            name: `Error: ${error}`
+          });
+          this.controlNextLoad = false; 
+          this.controlNextText = 'Show next'; 
+        });
         return;
     }
   }
