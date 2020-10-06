@@ -27,6 +27,8 @@
                    v-if="dialogChangeShow"
                    @close="() => {dialogChangeShow = false}"
                    @change="itemChange"></dialog-change>
+    <div class="main-page__blocked-content"
+         v-if="(dialogDeleteShow || dialogChangeShow)"></div>
   </div>
 </template>
 
@@ -145,6 +147,14 @@ export default {
         list-style: none;
       }
     }
+  }
+  &__blocked-content {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
   }
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
   <div id="app" class="app">
-    <main-page></main-page>
+    <div class="app__content">
+      <main-page></main-page>
+    </div>
+    <div class="app__footer"></div>
   </div>
 </template>
 

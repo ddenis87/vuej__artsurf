@@ -58,7 +58,7 @@ export default {
   background-color: white;
   box-shadow: 1px 1px 1px black;
   box-sizing: border-box;
-  
+  z-index: 998;
   .body {
     display: flex;
     align-items: center;

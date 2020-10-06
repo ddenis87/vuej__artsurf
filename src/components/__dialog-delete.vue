@@ -35,7 +35,7 @@ export default {
   background-color: white;
   box-shadow: 1px 1px 1px black;
   box-sizing: border-box;
-  
+  z-index: 999;
   .body {
     display: flex;
     align-items: flex-start;
